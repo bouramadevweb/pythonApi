@@ -1,0 +1,70 @@
+<!-- ========== Start Section ========== -->
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+
+    <h1>{{ title }}</h1>
+    <p>La longueur de l'ODS_CLUBS est : {{ ods_club|length }}</p>
+
+    <!-- Ajoutez la pagination ici -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if ods_club.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ ods_club.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ ods_club.number }} of {{ ods_club.paginator.num_pages }}.
+            </span>
+
+            {% if ods_club.has_next %}
+                <a href="?page={{ ods_club.next_page_number }}">next</a>
+                <a href="?page={{ ods_club.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Commune</th>
+                <th scope="col">Département</th>
+                <th scope="col">Région</th>
+                <th scope="col">Fédération</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in ods_club %}
+                <tr>
+                    <td>{{ data.commune }}</td>
+                    <td>{{ data.departement }}</td>
+                    <td>{{ data.region }}</td>
+                    <td>{{ data.federation }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Ajoutez à nouveau la pagination ici (si nécessaire) -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if ods_club.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ ods_club.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ ods_club.number }} of {{ ods_club.paginator.num_pages }}.
+            </span>
+
+            {% if ods_club.has_next %}
+                <a href="?page={{ ods_club.next_page_number }}">next</a>
+                <a href="?page={{ ods_club.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock %}
